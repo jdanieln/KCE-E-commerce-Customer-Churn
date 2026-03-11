@@ -28,6 +28,8 @@ KCE-E-commerce-Customer-Churn/
 │   └── ecommerce_customer_churn_dataset.csv  # Dataset en su ubicación segura y aislada
 ├── docs/
 │   └── dashboard_preview.png                 # Capturas y recursos multimedia
+├── notebooks/
+│   └── ecommerce_customer_churn_dataset.ipynb # Cuaderno de EDA y limpieza inicial de datos
 ├── src/
 │   ├── __init__.py
 │   ├── config.py                             # Capa de Configuración: Setup de página y estilos CSS
@@ -74,8 +76,14 @@ El dashboard se abrirá automáticamente en tu navegador predeterminado bajo la 
 
 ## 📊 Origen y Tratamiento de los Datos
 
-El archivo `ecommerce_customer_churn_dataset.csv` alimenta la visualización. Originalmente, este dataset fue tratado con transformaciones de Machine Learning (`StandardScaler`). 
-Para que el dashboard sea amigable para los equipos de negocio, el módulo `data_processor.py` realiza un proceso de **Transformación Inversa (Des-escalado)** en tiempo real, devolviendo métricas como el dinero gastado y el número de llamadas a valores humanos e interpretables (ej. $850 USD o 2 llamadas) en vez de puntajes *Z-Scores* abstractos.
+El proyecto se divide en dos fases de datos principales:
+
+### 1. Limpieza y Exploración Inicial (EDA)
+Todo el trabajo de preparación primario (manejo de variables categóricas complejas, imputaciones iniciales y escalado general con `StandardScaler` para futuros modelos predictivos) se llevó a cabo en Jupyter Notebook. 
+El archivo con esta experimentación vive en: `notebooks/ecommerce_customer_churn_dataset.ipynb`. Este cuaderno es la base matemática sobre la cual el dashboard opera.
+
+### 2. Transformación para Negocio (Dashboarding)
+El archivo `ecommerce_customer_churn_dataset.csv` (resultado del cuaderno) alimenta la visualización. Dado que este dataset terminó con variables estandarizadas, el módulo `data_processor.py` realiza un proceso de **Transformación Inversa (Des-escalado)** en tiempo real. Esto devuelve métricas como el dinero gastado y el número de llamadas a valores humanos e interpretables (ej. $850 USD o 2 llamadas) en vez de puntajes *Z-Scores* abstractos, haciéndolo ideal para la toma de decisiones gerenciales.
 
 ---
 **Desarrollado con 💙 utilizando Python, Pandas y Streamlit.**
